@@ -184,7 +184,7 @@ def ScanForContests():
 					id = str(item['id'])
 					original_id=id
 					is_retweet = 0
-					original_screen_name = "noisy_nobody"
+					original_screen_name = ""
 
 					if 'retweeted_status' in item:
 
