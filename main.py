@@ -58,8 +58,8 @@ def CheckRateLimit():
 	#c.daemon = True;
 	#c.start()
 
-	global ratelimit
-	global ratelimit_search
+	#global ratelimit
+	#global ratelimit_search
 
 	if ratelimit[2] < min_ratelimit:
 		print("Ratelimit too low -> Cooldown (" + str(ratelimit[2]) + "%)")
@@ -115,13 +115,8 @@ def UpdateQueue():
 			post_list.pop(0)
 		
 		else:
-	
 			print("Ratelimit at " + str(ratelimit[2]) + "% -> pausing retweets")
-	else:
-		print "waiting..."
-		time.sleep(30)
-		CheckRateLimit()
-		ScanForContests()
+			time.sleep(30)
 
 
 # Check if a post requires you to follow the user.
@@ -159,9 +154,9 @@ def CheckForFavoriteRequest(item):
 
 # Scan for new contests, but not too often because of the rate limit.
 def ScanForContests():
-	t = threading.Timer(scan_update_time, ScanForContests)
-	t.daemon = True;
-	t.start()
+	#t = threading.Timer(scan_update_time, ScanForContests)
+	#t.daemon = True;
+	#t.start()
 	
 	global ratelimit_search
 	
