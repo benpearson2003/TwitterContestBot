@@ -54,9 +54,9 @@ def CheckError( r ):
 		#sys.exit(r['errors'][0]['code'])
 
 def CheckRateLimit():
-        c = threading.Timer(rate_limit_update_time, CheckRateLimit)
-        c.daemon = True;
-        c.start()
+	#c = threading.Timer(rate_limit_update_time, CheckRateLimit)
+	#c.daemon = True;
+	#c.start()
 
 	global ratelimit
 	global ratelimit_search
@@ -92,9 +92,9 @@ def CheckRateLimit():
 
 # Update the Retweet queue (this prevents too many retweets happening at once.)
 def UpdateQueue():
-	u = threading.Timer(retweet_update_time, UpdateQueue)
-	u.daemon = True;
-	u.start()
+	#u = threading.Timer(retweet_update_time, UpdateQueue)
+	#u.daemon = True;
+	#u.start()
 
 	print("=== CHECKING RETWEET QUEUE ===")
 
@@ -117,6 +117,11 @@ def UpdateQueue():
 		else:
 	
 			print("Ratelimit at " + str(ratelimit[2]) + "% -> pausing retweets")
+	else:
+		print "waiting..."
+		time.sleep(30)
+		CheckRateLimit()
+		ScanForContests()
 
 
 # Check if a post requires you to follow the user.
@@ -240,10 +245,8 @@ def ScanForContests():
 
 		print("Search skipped! Queue: " + str(len(post_list)) + " Ratelimit: " + str(ratelimit_search[1]) + "/" + str(ratelimit_search[0]) + " (" + str(ratelimit_search[2]) + "%)")
 
-
-CheckRateLimit()
 ScanForContests()
-UpdateQueue()
-
 while (True):
-    time.sleep(1)
+	CheckRateLimit()
+	UpdateQueue()
+	time.sleep(1)
