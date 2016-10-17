@@ -58,8 +58,8 @@ def CheckRateLimit():
 	#c.daemon = True;
 	#c.start()
 
-	#global ratelimit
-	#global ratelimit_search
+	global ratelimit
+	global ratelimit_search
 
 	if ratelimit[2] < min_ratelimit:
 		print("Ratelimit too low -> Cooldown (" + str(ratelimit[2]) + "%)")
