@@ -100,7 +100,7 @@ def UpdateQueue():
 
 	print("Queue length: " + str(len(post_list)))
 
-	if len(post_list) > 0:
+	while len(post_list) > 0:
 
 		if not ratelimit[2] < min_ratelimit_retweet:
 
@@ -117,7 +117,6 @@ def UpdateQueue():
 		else:
 			print("Ratelimit at " + str(ratelimit[2]) + "% -> pausing retweets")
 			time.sleep(30)
-
 
 # Check if a post requires you to follow the user.
 # Be careful with this function! Twitter may write ban your application for following too aggressively
@@ -240,8 +239,8 @@ def ScanForContests():
 
 		print("Search skipped! Queue: " + str(len(post_list)) + " Ratelimit: " + str(ratelimit_search[1]) + "/" + str(ratelimit_search[0]) + " (" + str(ratelimit_search[2]) + "%)")
 
-ScanForContests()
 while (True):
+	ScanForContests()
 	CheckRateLimit()
 	UpdateQueue()
 	time.sleep(1)
